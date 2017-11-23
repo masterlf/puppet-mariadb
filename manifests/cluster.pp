@@ -47,7 +47,7 @@
 #     If true, configure each node to sync with only one other node. Sets
 #     `wsrep_cluster_address = 'gcomm://192.168.0.1'`. If false,
 #     sets `wsrep_cluster_address = 'gcomm://192.168.0.1,192.168.0.2,192.168.0.3'`,
-#     etc. based on number of nodes and the IP/hostname as set in 
+#     etc. based on number of nodes and the IP/hostname as set in
 #     `cluster_servers`.
 #   [*manage_status*]
 #     If true, manage the status user and status script.
@@ -67,7 +67,7 @@ class mariadb::cluster (
   $wsrep_sst_user          = 'root',
   $wsrep_cluster_name      = 'my_wsrep_cluster',
   $status_user             = 'clusterstatus',
-  $wsrep_sst_method        = 'mysqldump',
+  $wsrep_sst_method        = 'xtrabackup-v2',
   $wsrep_slave_threads     = $mariadb::params::slave_threads,
   $package_names           = $mariadb::params::cluster_package_names,
   $package_ensure          = $mariadb::params::cluster_package_ensure,
@@ -75,7 +75,7 @@ class mariadb::cluster (
   $galera_ensure           = $mariadb::params::cluster_package_ensure,
   $debiansysmaint_password = undef,
   $status_password         = undef,
-  $repo_version            = '5.5',
+  $repo_version            = '10.0',
   $config_hash             = {},
   $enabled                 = true,
   $single_cluster_peer     = true,
