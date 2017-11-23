@@ -14,7 +14,7 @@ class mariadb::repo::debian (
     $key_options = "http-proxy=${::http_proxy}"
   }
   else {
-    $key_options = false
+    $key_options = ''
   }
 
   apt::key { 'mariadb-1':

@@ -18,7 +18,7 @@ class mariadb::params {
   $ssl                 = false
   $restart             = true
   $slave_threads       = $::processorcount * 2
-  $repo_version        = '5.5'
+  $repo_version        = '10.0'
 
   case $::osfamily {
     'RedHat': {
@@ -77,7 +77,7 @@ class mariadb::params {
       $ssl_key                = "${config_dir}//server-key.pem"
       $repo_class             = 'mariadb::repo::debian'
       $wsrep_provider         = '/usr/lib/galera/libgalera_smm.so'
-      $default_mirror         = 'http://mirror.aarnet.edu.au/pub/MariaDB'
+      $default_mirror         = 'http://mirror.host.ag/mariadb' #'http://mirror.aarnet.edu.au/pub/MariaDB'
     }
 
     default: {
