@@ -20,6 +20,7 @@
 #   [*default_engine]     - configure a default table engine
 #   [*root_group]         - use specified group for root-owned files
 #   [*restart]            - whether to restart mariadbd (true/false)
+#   [*remove_default_accounts*] - remove the default account present at installation 
 #
 # Actions:
 #
@@ -35,27 +36,28 @@
 #   }
 #
 class mariadb::config(
-  $root_password     = 'UNSET',
-  $old_root_password = '',
-  $bind_address      = $mariadb::params::bind_address,
-  $port              = $mariadb::params::port,
-  $etc_root_password = $mariadb::params::etc_root_password,
-  $service_name      = $mariadb::params::service_name,
-  $config_dir        = $mariadb::params::config_dir,
-  $config_file       = $mariadb::params::config_file,
-  $socket            = $mariadb::params::socket,
-  $pidfile           = $mariadb::params::pidfile,
-  $datadir           = $mariadb::params::datadir,
-  $tmpdir            = $mariadb::params::tmpdir,
-  $ssl               = $mariadb::params::ssl,
-  $ssl_ca            = $mariadb::params::ssl_ca,
-  $ssl_cert          = $mariadb::params::ssl_cert,
-  $ssl_key           = $mariadb::params::ssl_key,
-  $log_error         = $mariadb::params::log_error,
-  $default_engine    = 'UNSET',
-  $root_group        = $mariadb::params::root_group,
-  $restart           = $mariadb::params::restart,
-  $purge_conf_dir    = false
+  $root_password           = 'UNSET',
+  $old_root_password       = '',
+  $bind_address            = $mariadb::params::bind_address,
+  $port                    = $mariadb::params::port,
+  $etc_root_password       = $mariadb::params::etc_root_password,
+  $service_name            = $mariadb::params::service_name,
+  $config_dir              = $mariadb::params::config_dir,
+  $config_file             = $mariadb::params::config_file,
+  $socket                  = $mariadb::params::socket,
+  $pidfile                 = $mariadb::params::pidfile,
+  $datadir                 = $mariadb::params::datadir,
+  $tmpdir                  = $mariadb::params::tmpdir,
+  $ssl                     = $mariadb::params::ssl,
+  $ssl_ca                  = $mariadb::params::ssl_ca,
+  $ssl_cert                = $mariadb::params::ssl_cert,
+  $ssl_key                 = $mariadb::params::ssl_key,
+  $log_error               = $mariadb::params::log_error,
+  $default_engine          = 'UNSET',
+  $root_group              = $mariadb::params::root_group,
+  $restart                 = $mariadb::params::restart,
+  $purge_conf_dir          = false,
+  $remove_default_accounts = false,
 ) inherits mariadb::params {
 
   File {
@@ -108,6 +110,12 @@ class mariadb::config(
       },
       require   => [Class['mariadb::server'], File[$mariadb::params::config_dir]],
     }
+
+    if $remove_default_accounts {
+    class { '::mariadb::server::account_security':
+      require => Anchor['mariadb::server'],
+    }
+  }
 
     file { '/root/.my.cnf':
       content => template('mariadb/my.cnf.pass.erb'),
