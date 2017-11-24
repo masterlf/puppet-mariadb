@@ -20,7 +20,7 @@
 #   [*default_engine]     - configure a default table engine
 #   [*root_group]         - use specified group for root-owned files
 #   [*restart]            - whether to restart mariadbd (true/false)
-#   [*remove_default_accounts*] - remove the default account present at installation 
+#   [*remove_default_accounts*] - remove the default account present at installation
 #
 # Actions:
 #
@@ -113,7 +113,7 @@ class mariadb::config(
 
     if $remove_default_accounts {
     class { '::mariadb::server::account_security':
-      require => Anchor['mariadb::server'],
+      require => Class['mariadb::server'],
     }
   }
 
