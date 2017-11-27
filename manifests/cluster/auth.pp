@@ -1,6 +1,6 @@
 class mariadb::cluster::auth (
   $wsrep_sst_password,
-  $wsrep_sst_user     = 'root',
+  $wsrep_sst_user     = 'clustersstuser',
 ) {
 
   database_user { "${wsrep_sst_user}@%":
