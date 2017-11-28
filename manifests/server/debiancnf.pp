@@ -9,5 +9,10 @@ class mariadb::server::debiancnf (
       content => template('mariadb/debian.cnf.erb'),
       require => Package[$package_names],
     }
+    database_user { 'debian-sys-maint@localhost':
+      ensure        => present,
+      password_hash => mysql_password($debiansysmaint_password),
+      require       => Class['mariadb::server'],
+    }
   }
 }
