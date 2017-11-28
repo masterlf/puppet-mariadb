@@ -91,7 +91,7 @@ class mariadb::server (
     database_user { 'debian-sys-maint@localhost':
       ensure        => present,
       password_hash => mysql_password($debiansysmaint_password),
-      require       => Class['mariadb::server::config'],
+      #require       => Class['mariadb::server::config'],
     }
   }
 
