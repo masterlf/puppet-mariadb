@@ -45,6 +45,12 @@ Installs the mariadb and supporting galera packages for a cluster.
         }
     }
 
+Configure additional options for Galera, details can be found at [mariaDB](https://mariadb.com/kb/en/library/galera-cluster-system-variables/) 
+- wsrep_log_conflicts
+- wsrep_provider_options
+- wsrep_max_ws_rows
+- wsrep_max_ws_size
+
 ### mariadb::db
 Creates a database with a user and assign some privileges.
 
