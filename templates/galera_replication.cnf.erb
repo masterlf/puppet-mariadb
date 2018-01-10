@@ -15,19 +15,19 @@ wsrep_sst_method = <%= @wsrep_sst_method %>
 wsrep_slave_threads = <%= @wsrep_slave_threads %>
 wsrep_node_address = <%= instance_variable_get("@ipaddress_#{@cluster_iface}") %>
 wsrep_node_incoming_address = <%= instance_variable_get("@ipaddress_#{@cluster_iface}") %>
-<%- if @wsrep_log_conflicts != undef -%>
+<%- if @wsrep_log_conflicts != nil -%>
 wsrep_log_conflicts = <%= @wsrep_log_conflicts %>
 <%- end -%>
-<%- if @wsrep_provider_options != undef -%>
+<%- if @wsrep_provider_options != nil -%>
 wsrep_provider_options = "<%= @wsrep_provider_options %>"
 <%- end -%>
-<%- if @wsrep_slave_threads != undef -%>
+<%- if @wsrep_slave_threads != nil -%>
 wsrep_slave_threads = <%= @wsrep_slave_threads %>
 <%- end -%>
-<%- if @wsrep_max_ws_rows != undef -%>
+<%- if @wsrep_max_ws_rows != nil -%>
 wsrep_max_ws_rows = <%= @wsrep_max_ws_rows %>
 <%- end -%>
-<%- if @wsrep_max_ws_size != undef %>
+<%- if @wsrep_max_ws_size != nil %>
 wsrep_max_ws_size = <%= @wsrep_max_ws_size %>
 <%- end -%>
 
