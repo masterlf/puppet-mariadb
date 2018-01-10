@@ -19,11 +19,11 @@ class mariadb::params {
   $restart                = true
   $slave_threads          = $::processorcount * 2
   $repo_version           = '10.0'
-  $wsrep_log_conflicts    = undef,
-  $wsrep_provider_options = undef,
-  $wsrep_slave_threads    = undef,
-  $wsrep_max_ws_rows      = undef,
-  $wsrep_max_ws_size      = undef,
+  $wsrep_log_conflicts    = undef
+  $wsrep_provider_options = undef
+  $wsrep_slave_threads    = undef
+  $wsrep_max_ws_rows      = undef
+  $wsrep_max_ws_size      = undef
 
   case $::osfamily {
     'RedHat': {
